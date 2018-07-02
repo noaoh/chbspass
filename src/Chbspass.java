@@ -6,14 +6,14 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Chbspass {
-    private final static int numWords = 1000;
-    private final static String[] words = new String[numWords];
+    private final static int Words = 1000;
+    private final static String[] words = new String[Words];
     private final static String filepath = "C:\\Users\\NHol01\\IdeaProjects\\chbspass\\src\\top-1000-words-uc.txt";
-    private final static String[] numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-    private final static  String[] symbols = {"!", "@", "#", "$", "^", "%", "&", "*"};
+    private final static String[] nums = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    private final static  String[] syms = {"!", "@", "#", "$", "^", "%", "&", "*"};
     private final int passwordLength;
-    private final int numNumbers;
-    private final int numSymbols;
+    private final int Numbers;
+    private final int Symbols;
     private final int constraintLength;
     private SecureRandom PwdGen = new SecureRandom();
     static {
@@ -22,27 +22,27 @@ public class Chbspass {
 
     public Chbspass(Password password) {
         this.passwordLength = password.passwordLength;
-        this.numNumbers = password.numNumbers;
-        this.numSymbols = password.numSymbols;
-        this.constraintLength = this.passwordLength - this.numNumbers - this.numSymbols;
+        this.Numbers = password.Numbers;
+        this.Symbols = password.Symbols;
+        this.constraintLength = this.passwordLength - this.Numbers - this.Symbols;
     }
 
     public static class Password {
         private int passwordLength;
-        private int numNumbers = 2;
-        private int numSymbols = 2;
+        private int Numbers = 2;
+        private int Symbols = 2;
 
         public Password(int passwordLength) {
             this.passwordLength = passwordLength;
         }
 
-        public Password numNumbers(int val) {
-            numNumbers = val;
+        public Password Numbers(int val) {
+            Numbers = val;
             return this;
         }
 
-        public Password numSymbols(int val) {
-            numSymbols = val;
+        public Password Symbols(int val) {
+            Symbols = val;
             return this;
         }
 
@@ -78,14 +78,14 @@ public class Chbspass {
             pw.append(word);
         }
 
-        for (int x = 0; x < this.numNumbers; x++) {
-            String number = numbers[PwdGen.nextInt(9)];
-            pw.append(number);
+        for (int x = 0; x < this.Numbers; x++) {
+            String num = nums[PwdGen.nextInt(9)];
+            pw.append(num);
         }
 
-        for (int y = 0; y < this.numSymbols; y++) {
-            String symbol = symbols[PwdGen.nextInt(8)];
-            pw.append(symbol);
+        for (int y = 0; y < this.Symbols; y++) {
+            String sym = syms[PwdGen.nextInt(8)];
+            pw.append(sym);
         }
 
         return pw.toString();
