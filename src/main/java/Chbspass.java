@@ -63,8 +63,8 @@ public class Chbspass {
         }
     }
 
-    private void readWords(ArrayList<String> data) {
-        this.WordList.clear();
+    public void readWords(ArrayList<String> data) {
+        this.WordList = new ArrayList<String>();
         WordList.addAll(data);
     }
 
@@ -93,7 +93,7 @@ public class Chbspass {
     }
 
     public ArrayList<String> Next(int n) {
-        ArrayList<String> pws = new ArrayList<>(n);
+        ArrayList<String> pws = new ArrayList<String>(n);
         for (int i = 0; i < n; i++) {
             pws.add(this.Next());
         }

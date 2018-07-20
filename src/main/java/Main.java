@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 public class Main {
     private final static String filepath = "C:\\Users\\NHol01\\IdeaProjects\\chbspass\\src\\top-1000-words-uc.txt";
 
