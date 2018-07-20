@@ -6,21 +6,17 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Chbspass {
-    private final static int Words = 1000;
-    private final static String[] words = new String[Words];
-    private final static String filepath = "C:\\Users\\NHol01\\IdeaProjects\\chbspass\\src\\top-1000-words-uc.txt";
+    private ArrayList<String> WordList;
     private final static String[] nums = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
     private final static  String[] syms = {"!", "@", "#", "$", "^", "%", "&", "*"};
-    private final int passwordLength;
-    private final int Numbers;
-    private final int Symbols;
-    private final int constraintLength;
+    private int passwordLength;
+    private int Numbers;
+    private int Symbols;
+    private int constraintLength;
     private SecureRandom PwdGen = new SecureRandom();
-    static {
-        Chbspass.readWordFile(filepath);
-    }
 
     public Chbspass(Password password) {
+        this.WordList = WordList;
         this.passwordLength = password.passwordLength;
         this.Numbers = password.Numbers;
         this.Symbols = password.Symbols;
@@ -28,6 +24,7 @@ public class Chbspass {
     }
 
     public static class Password {
+        private static final ArrayList<String> PlaceHolder = new ArrayList<String>();
         private int passwordLength;
         private int Numbers = 2;
         private int Symbols = 2;
@@ -51,14 +48,13 @@ public class Chbspass {
         }
     }
 
-    private static void readWordFile(String filepath) {
-        int i = 0;
+    public void readWordFile(String filepath) {
         String w;
+        this.WordList = new ArrayList<String>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filepath));
             while ((w = br.readLine()) != null) {
-                Chbspass.words[i] = w;
-                i++;
+                this.WordList.add(w);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -67,12 +63,17 @@ public class Chbspass {
         }
     }
 
+    private void readWords(ArrayList<String> data) {
+        this.WordList.clear();
+        WordList.addAll(data);
+    }
+
     public String Next() {
         StringBuilder pw = new StringBuilder();
         String word = "";
         while (pw.length() < this.constraintLength) {
             do {
-                word = words[PwdGen.nextInt(1000)];
+                word = WordList.get(PwdGen.nextInt(WordList.size()));
             }
             while (word.length() + pw.length() > this.constraintLength);
             pw.append(word);
