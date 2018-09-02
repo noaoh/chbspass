@@ -1,3 +1,5 @@
+package org.noaoh.chbspass;
+
 import java.util.ArrayList;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
@@ -5,10 +7,10 @@ import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
 public class Main {
-    private final static String filepath = "C:\\Users\\NHol01\\IdeaProjects\\chbspass\\src\\main\\java\\top-1000-words-uc.txt";
+    private final static String filepath = "top-1000-words-uc.txt";
 
     public static void main(String[] args) {
-        ArgumentParser parser = ArgumentParsers.newFor("Main").build()
+        ArgumentParser parser = ArgumentParsers.newFor("org.noaoh.chbpass.Main").build()
                 .defaultHelp(true)
                 .description("Generates an xkcd-style password.");
         parser.addArgument("-l", "--length")
